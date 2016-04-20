@@ -18,6 +18,7 @@ private {
     import std.process : environment;
     import std.range;
     import std.string : toStringz, toLower;
+    import std.uni : sicmp;
 }
 
 version(Windows) {
@@ -70,12 +71,17 @@ version(unittest) {
             return pathExt.splitter(pathVarSeparator);
         }
         
-        auto pathExts = splitValues(environment.get("PATHEXT"));
-        if (canFind!(filenamesEqual)(pathExts, ".exe") == false) {
+        try {
+            auto pathExts = splitValues(environment.get("PATHEXT"));
+            if (canFind!(filenamesEqual)(pathExts, ".exe") == false) {
+                return splitValues(defaultExts);
+            } else {
+                return pathExts;
+            }
+        } catch(Exception e) {
             return splitValues(defaultExts);
-        } else {
-            return pathExts;
         }
+        
     } else {
         return (string[]).init;
     }
@@ -87,7 +93,7 @@ unittest
     version(Windows) {
         auto guard = EnvGuard("PATHEXT");
         environment["PATHEXT"] = ".exe;.bat;.cmd";
-        assert(equal(executableExtensions(), [".ext", ".bat", ".cmd"]));
+        assert(equal(executableExtensions(), [".exe", ".bat", ".cmd"]));
         environment["PATHEXT"] = "";
         assert(equal(executableExtensions(), defaultExts.splitter(pathVarSeparator)));
     } else {
@@ -157,10 +163,11 @@ unittest
 }
 
 /**
- * Finds executable by fileName in the paths.
+ * Find executable by fileName in the paths.
  * Returns: Absolute path to the existing executable file or an empty string if not found.
  * Params:
- *  fileName = Name of executable to search. If it's absolute path, this function only checks if the file is executable.
+ *  fileName = Name of executable to search. Should be base name or absolute path. Relative paths will not work.
+ *       If it's an absolute path, this function does not try to append extensions.
  *  paths = Range of directories where executable should be searched.
  *  extensions = Range of extensions to append during searching if fileName does not have extension.
  * See_Also: binPaths, executableExtensions
