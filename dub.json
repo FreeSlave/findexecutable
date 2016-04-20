@@ -1,0 +1,13 @@
+{
+    "name": "findexecutable",
+    "description": "Searching for executable files in system paths",
+    "license" : "BSL-1.0", 
+    "copyright": "Copyright © 2016, Roman Chistokhodov",
+    "authors" : ["Roman Chistokhodov"], 
+    "targetName" : "findexecutable", 
+    "targetPath" : "lib", 
+    "targetType" : "library",
+    "dependencies": {
+    },
+    "subPackages" : ["./examples/findexecutable"]
+}
