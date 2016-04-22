@@ -12,13 +12,16 @@ module findexecutable;
 
 private {
     import std.algorithm : canFind, splitter, filter;
-    import std.exception : collectException;
-    import std.file : isFile;
     import std.path;
     import std.process : environment;
     import std.range;
-    import std.string : toStringz, toLower;
-    import std.uni : sicmp;
+    
+    version(Windows) {
+        import std.uni : toLower;
+    }
+    version(Posix) {
+        import std.string : toStringz;
+    }
 }
 
 version(Windows) {
@@ -53,7 +56,8 @@ version(unittest) {
 
 /**
  * Default executable extensions for the current system.
- * On Windows this functions examines PATHEXT environment variable to get the list of executables extensions.
+ * On Windows this functions examines PATHEXT environment variable to get the list of executables extensions. 
+ * Fallbacks to .exe;.com;.bat;.cmd if PATHEXT does not list .exe extension.
  * On other systems it always returns empty range.
  */
 @trusted auto executableExtensions() nothrow
@@ -72,7 +76,7 @@ version(unittest) {
         }
         
         try {
-            auto pathExts = splitValues(environment.get("PATHEXT"));
+            auto pathExts = splitValues(environment.get("PATHEXT").toLower());
             if (canFind!(filenamesEqual)(pathExts, ".exe") == false) {
                 return splitValues(defaultExts);
             } else {
@@ -111,7 +115,7 @@ private bool isExecutable(Exts)(string filePath, Exts exts) nothrow {
             
             string extension = filePath.extension;
             foreach(ext; exts) {
-                if (sicmp(extension, ext) == 0)
+                if (filenameCmp(extension, ext) == 0)
                     return true;
             }
             return false;
@@ -125,6 +129,7 @@ private bool isExecutable(Exts)(string filePath, Exts exts) nothrow {
 }
 
 private string checkExecutable(Exts)(string filePath, Exts exts) nothrow {
+    import std.file : isFile;
     try {
         if (filePath.isFile && isExecutable(filePath, exts)) {
             return buildNormalizedPath(filePath);
@@ -144,6 +149,7 @@ private string checkExecutable(Exts)(string filePath, Exts exts) nothrow {
  */
 @trusted auto binPaths()
 {
+    import std.exception : collectException;
     string pathVar;
     collectException(environment.get("PATH"), pathVar);
     return splitter(pathVar, pathVarSeparator).filter!(p => p.length != 0);
@@ -170,6 +176,7 @@ unittest
  *       If it's an absolute path, this function does not try to append extensions.
  *  paths = Range of directories where executable should be searched.
  *  extensions = Range of extensions to append during searching if fileName does not have extension.
+ * Note: Currently it does not check if current user really have permission to execute the file on Windows.
  * See_Also: binPaths, executableExtensions
  */
 string findExecutable(Paths, Exts)(string fileName, Paths paths, Exts extensions) 
@@ -189,9 +196,6 @@ if (isInputRange!Paths && is(ElementType!Paths : string) && isInputRange!Exts &&
                 
                 if (candidate.extension.empty && !extensions.empty) {
                     foreach(exeExtension; extensions) {
-                        version(Windows) {
-                            exeExtension = exeExtension.toLower();
-                        }
                         toReturn = checkExecutable(setExtension(candidate, exeExtension), extensions);
                         if (toReturn.length) {
                             return toReturn;
