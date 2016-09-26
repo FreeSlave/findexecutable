@@ -2,11 +2,11 @@
 
 D library for finding executable files using PATH environment variable.
 
-[![Build Status](https://travis-ci.org/MyLittleRobo/findexecutable.svg?branch=master)](https://travis-ci.org/MyLittleRobo/findexecutable)
+[![Build Status](https://travis-ci.org/FreeSlave/findexecutable.svg?branch=master)](https://travis-ci.org/FreeSlave/findexecutable)
 
-Originally this was a part of [standardpaths](https://github.com/MyLittleRobo/standardpaths) library. But I found need in this kind of functionality in my other projects that don't depend on standardpaths.
+Originally this was a part of [standardpaths](https://github.com/FreeSlave/standardpaths) library. But I found need in this kind of functionality in my other projects that don't depend on standardpaths.
 
-[Online documentation](https://mylittlerobo.github.io/findexecutable/findexecutable.html)
+[Online documentation](https://freeslave.github.io/findexecutable/findexecutable.html)
 
 ## Examples
 
