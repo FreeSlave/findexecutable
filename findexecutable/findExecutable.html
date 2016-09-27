@@ -6,10 +6,9 @@
 		<link rel="stylesheet" type="text/css" href="../styles/ddox.css"/>
 		<link rel="stylesheet" href="../prettify/prettify.css" type="text/css"/>
 		<script type="text/javascript" src="../scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="../prettify/prettify.js">/**/</script>
 		<script type="text/javascript" src="../scripts/ddox.js">/**/</script>
 	</head>
-	<body onload="prettyPrint(); setupDdox();">
+	<body onload="setupDdox();">
 		<nav id="main-nav">
 						<ul class="tree-view">
 							<li>
@@ -40,18 +39,26 @@ $('#symbolSearchPane').show();
 			</ul>
 			<section>
 				<h2>Function findExecutable</h2>
-				<p> Find executable by <a href="../findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> in the <a href="../findexecutable/findExecutable.html#paths"><code class="prettyprint lang-d">paths</code></a>.
+				<p>Find executable by fileName in the paths.
 </p>
 
 					<section>
 						<h3>Prototype</h3>
-						<pre class="code prettyprint lang-d prototype">
-string findExecutable(Paths, Exts)(
-&nbsp;&nbsp;string fileName,
-&nbsp;&nbsp;Paths paths,
-&nbsp;&nbsp;Exts extensions
-)
-if (isInputRange!Paths &amp;&amp; is(ElementType!Paths : string) &amp;&amp; isInputRange!Exts &amp;&amp; is(ElementType!Exts : string));</pre>
+						<div class="prototype">
+							<code class="lang-d">
+<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span><span class="typ">Paths</span><span class="pun">, </span><span class="typ">Exts</span><span class="pun">)</span><span class="pun">(</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span><span class="pun">,</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">Exts</span> <span class="pln">extensions</span>
+								<br/>
+<span class="pun">)</span>
+								<br/>
+<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">) &amp;&amp; </span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
+							</code>
+						</div>
 					</section>
 <section><h3>Returns</h3>
 <p>Absolute path to the existing executable file or an empty string if not found.
@@ -59,72 +66,88 @@ if (isInputRange!Paths &amp;&amp; is(ElementType!Paths : string) &amp;&amp; isIn
 </section>
 <section><h3>Parameters</h3>
 <table><col class="caption"><tr><th>Name</th><th>Description</th></tr>
-<tr><td id="fileName">fileName</td><td> Name of executable to search. Should be base name or absolute path. Relative <a href="../findexecutable/findExecutable.html#paths"><code class="prettyprint lang-d">paths</code></a> will not work.
-       If it's an absolute path, this function does not try to append <a href="../findexecutable/findExecutable.html#extensions"><code class="prettyprint lang-d">extensions</code></a>.</td></tr>
+<tr><td id="fileName">fileName</td><td> Name of executable to search. Should be base name or absolute path. Relative paths will not work.
+       If it's an absolute path, this function does not try to append extensions.</td></tr>
 <tr><td id="paths">paths</td><td> Range of directories where executable should be searched.</td></tr>
-<tr><td id="extensions">extensions</td><td> Range of <a href="../findexecutable/findExecutable.html#extensions"><code class="prettyprint lang-d">extensions</code></a> to append during searching if <a href="../findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> does not have extension.</td></tr>
+<tr><td id="extensions">extensions</td><td> Range of extensions to append during searching if fileName does not have extension.</td></tr>
 </table>
 </section>
+<section><h3>Note</h3>
+<p>Currently it does not check if current user really have permission to execute the file on Windows.
+</p>
+</section>
 <section><h3>See Also</h3>
-<p><a href="../findexecutable/binPaths.html"><code class="prettyprint lang-d">binPaths</code></a>, <a href="../findexecutable/executableExtensions.html"><code class="prettyprint lang-d">executableExtensions</code></a>
+<p>binPaths, executableExtensions
 </p>
 </section>
 
 			</section>
 			<section>
 				<h2>Function findExecutable</h2>
-				<p> ditto, but on Windows when <a href="../findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> extension is omitted, executable extensions are appended during search.
+				<p>ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
 </p>
 
 					<section>
 						<h3>Prototype</h3>
-						<pre class="code prettyprint lang-d prototype">
-string findExecutable(Paths)(
-&nbsp;&nbsp;string fileName,
-&nbsp;&nbsp;Paths paths
-)
-if (isInputRange!Paths &amp;&amp; is(ElementType!Paths : string));</pre>
+						<div class="prototype">
+							<code class="lang-d">
+<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span><span class="typ">Paths</span><span class="pun">)</span><span class="pun">(</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span>
+								<br/>
+<span class="pun">)</span>
+								<br/>
+<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
+							</code>
+						</div>
 					</section>
 <section><h3>See Also</h3>
-<p><a href="../findexecutable/binPaths.html"><code class="prettyprint lang-d">binPaths</code></a>, <a href="../findexecutable/executableExtensions.html"><code class="prettyprint lang-d">executableExtensions</code></a>
+<p>binPaths, executableExtensions
 </p>
 </section>
 
 			</section>
 			<section>
 				<h2>Function findExecutable</h2>
-				<p> ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
- On Windows when <a href="../findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> extension is omitted, executable extensions are appended during search.
+				<p>ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
+ On Windows when fileName extension is omitted, executable extensions are appended during search.
 </p>
 
 					<section>
 						<h3>Prototype</h3>
-						<pre class="code prettyprint lang-d prototype">
-string findExecutable(
-&nbsp;&nbsp;string fileName
-) nothrow @trusted;</pre>
+						<div class="prototype">
+							<code class="lang-d">
+<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span>
+								<br/>
+&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span>
+								<br/>
+<span class="pun">)</span><span class="pln"> </span><span class="kwd">nothrow @trusted</span><span class="pun">;</span>
+							</code>
+						</div>
 					</section>
 <section><h3>See Also</h3>
-<p><a href="../findexecutable/binPaths.html"><code class="prettyprint lang-d">binPaths</code></a>, <a href="../findexecutable/executableExtensions.html"><code class="prettyprint lang-d">executableExtensions</code></a>
+<p>binPaths, executableExtensions
 </p>
 </section>
 
 			</section>
 			<section>
 				<h2>Authors</h2>
-<p>  <a href="https://github.com/MyLittleRobo">Roman Chistokhodov</a>
+<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
 			</section>
 			<section>
 				<h2>Copyright</h2>
-<p>  Roman Chistokhodov 2016
+<p>Roman Chistokhodov 2016
 </p>
 
 			</section>
 			<section>
 				<h2>License</h2>
-<p>  <a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
 			</section>

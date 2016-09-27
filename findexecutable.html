@@ -6,10 +6,9 @@
 		<link rel="stylesheet" type="text/css" href="./styles/ddox.css"/>
 		<link rel="stylesheet" href="./prettify/prettify.css" type="text/css"/>
 		<script type="text/javascript" src="./scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="./prettify/prettify.js">/**/</script>
 		<script type="text/javascript" src="./scripts/ddox.js">/**/</script>
 	</head>
-	<body onload="prettyPrint(); setupDdox();">
+	<body onload="setupDdox();">
 		<nav id="main-nav">
 						<ul class="tree-view">
 							<li>
@@ -33,7 +32,7 @@ $('#symbolSearchPane').show();
 		</nav>
 		<div id="main-contents">
 			<h1>Module findexecutable</h1>
-			<p> Searching for executable files in system paths.
+			<p>Searching for executable files in system paths.
 </p>
 
 			<section></section>
@@ -51,7 +50,7 @@ $('#symbolSearchPane').show();
 								<code>binPaths</code>
 							</a>
 						</td>
-						<td> System paths where executable files can be found.
+						<td>System paths where executable files can be found.
 </td>
 					</tr>
 					<tr>
@@ -60,8 +59,9 @@ $('#symbolSearchPane').show();
 								<code>executableExtensions</code>
 							</a>
 						</td>
-						<td> Default executable extensions for the current system.
+						<td>Default executable extensions for the current system.
  On Windows this functions examines PATHEXT environment variable to get the list of executables extensions.
+ Fallbacks to .exe;.com;.bat;.cmd if PATHEXT does not list .exe extension.
  On other systems it always returns empty range.
 </td>
 					</tr>
@@ -71,7 +71,7 @@ $('#symbolSearchPane').show();
 								<code>findExecutable</code>
 							</a>
 						</td>
-						<td> Find executable by <a href="./findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> in the <a href="./findexecutable/findExecutable.html#paths"><code class="prettyprint lang-d">paths</code></a>.
+						<td>Find executable by fileName in the paths.
 </td>
 					</tr>
 					<tr>
@@ -80,7 +80,7 @@ $('#symbolSearchPane').show();
 								<code>findExecutable</code>
 							</a>
 						</td>
-						<td> ditto, but on Windows when <a href="./findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> extension is omitted, executable extensions are appended during search.
+						<td>ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
 </td>
 					</tr>
 					<tr>
@@ -89,27 +89,27 @@ $('#symbolSearchPane').show();
 								<code>findExecutable</code>
 							</a>
 						</td>
-						<td> ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
- On Windows when <a href="./findexecutable/findExecutable.html#fileName"><code class="prettyprint lang-d">fileName</code></a> extension is omitted, executable extensions are appended during search.
+						<td>ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
+ On Windows when fileName extension is omitted, executable extensions are appended during search.
 </td>
 					</tr>
 				</table>
 			</section>
 			<section>
 				<h2>Authors</h2>
-<p>  <a href="https://github.com/MyLittleRobo">Roman Chistokhodov</a>
+<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
 			</section>
 			<section>
 				<h2>Copyright</h2>
-<p>  Roman Chistokhodov 2016
+<p>Roman Chistokhodov 2016
 </p>
 
 			</section>
 			<section>
 				<h2>License</h2>
-<p>  <a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
 			</section>

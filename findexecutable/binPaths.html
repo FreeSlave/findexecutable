@@ -6,10 +6,9 @@
 		<link rel="stylesheet" type="text/css" href="../styles/ddox.css"/>
 		<link rel="stylesheet" href="../prettify/prettify.css" type="text/css"/>
 		<script type="text/javascript" src="../scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="../prettify/prettify.js">/**/</script>
 		<script type="text/javascript" src="../scripts/ddox.js">/**/</script>
 	</head>
-	<body onload="prettyPrint(); setupDdox();">
+	<body onload="setupDdox();">
 		<nav id="main-nav">
 						<ul class="tree-view">
 							<li>
@@ -34,13 +33,16 @@ $('#symbolSearchPane').show();
 		<div id="main-contents">
 			<h1>Function binPaths</h1>
 			<section>
-				<p> System paths where executable files can be found.
+				<p>System paths where executable files can be found.
 </p>
 
 					<section>
 						<h3>Prototype</h3>
-						<pre class="code prettyprint lang-d prototype">
-auto std.<wbr/>algorithm.<wbr/>iteration.<wbr/>__T12FilterResultS3914findexecutable8binPathsFNeZ9__lambda2TS3std9algorithm9iteration38__T8splitterVAyaa6_61203d3d2062TAyaTaZ8splitterFAyaaZ6ResultZ.<wbr/>FilterResult binPaths() @trusted;</pre>
+						<div class="prototype">
+							<code class="lang-d">
+<span class="kwd">auto </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">algorithm<wbr/></span><span class="pun">.</span><span class="pln">iteration<wbr/></span><span class="pun">.</span><span class="pln">__T12FilterResultS3914findexecutable8binPathsFNeZ9__lambda2TS3std9algorithm9iteration38__T8splitterVAyaa6_61203d3d2062TAyaTaZ8splitterFAyaaZ6ResultZ<wbr/></span><span class="pun">.</span><span class="typ">FilterResult</span> <span class="pln">binPaths<span class="pun">()</span><span class="pln"> </span><span class="kwd">@trusted</span><span class="pun">;</span>
+							</code>
+						</div>
 					</section>
 <section><h3>Returns</h3>
 <p>Range of non-empty paths as determined by <b>PATH</b> environment variable.
@@ -51,34 +53,33 @@ auto std.<wbr/>algorithm.<wbr/>iteration.<wbr/>__T12FilterResultS3914findexecuta
 </p>
 </section>
 <section><h3>Example</h3>
-
-<pre class="code prettyprint lang-d">auto pathGuard = EnvGuard("PATH");
-version(Windows) {
-    environment["PATH"] = ".;C:\\Windows\\system32;C:\\Program Files";
-    assert(equal(binPaths(), [".", "C:\\Windows\\system32", "C:\\Program Files"]));
-} else {
-    environment["PATH"] = ".:/usr/apps:/usr/local/apps:";
-    assert(equal(binPaths(), [".", "/usr/apps", "/usr/local/apps"]));
+<pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">pathGuard </span><span class="pun">= </span><span class="typ">EnvGuard</span><span class="pun">(</span><span class="str">"PATH"</span><span class="pun">);
+</span><span class="kwd">version</span><span class="pun">(</span><span class="typ">Windows</span><span class="pun">) {
+    </span><span class="pln">environment</span><span class="pun">[</span><span class="str">"PATH"</span><span class="pun">] = </span><span class="str">".;C:\\Windows\\system32;C:\\Program Files"</span><span class="pun">;
+    </span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">equal</span><span class="pun">(</span><span class="pln">binPaths</span><span class="pun">(), [</span><span class="str">"."</span><span class="pun">, </span><span class="str">"C:\\Windows\\system32"</span><span class="pun">, </span><span class="str">"C:\\Program Files"</span><span class="pun">]));
+} </span><span class="kwd">else </span><span class="pun">{
+    </span><span class="pln">environment</span><span class="pun">[</span><span class="str">"PATH"</span><span class="pun">] = </span><span class="str">".:/usr/apps:/usr/local/apps:"</span><span class="pun">;
+    </span><span class="kwd">assert</span><span class="pun">(</span><span class="pln">equal</span><span class="pun">(</span><span class="pln">binPaths</span><span class="pun">(), [</span><span class="str">"."</span><span class="pun">, </span><span class="str">"/usr/apps"</span><span class="pun">, </span><span class="str">"/usr/local/apps"</span><span class="pun">]));
 }
-</pre>
+</span></code></pre>
 </section>
 
 			</section>
 			<section>
 				<h2>Authors</h2>
-<p>  <a href="https://github.com/MyLittleRobo">Roman Chistokhodov</a>
+<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
 			</section>
 			<section>
 				<h2>Copyright</h2>
-<p>  Roman Chistokhodov 2016
+<p>Roman Chistokhodov 2016
 </p>
 
 			</section>
 			<section>
 				<h2>License</h2>
-<p>  <a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
 			</section>
