@@ -1,3 +1,8 @@
+/+dub.sdl:
+name "find"
+dependency "findexecutable" path="../"
++/
+
 import std.stdio;
 import findexecutable;
 

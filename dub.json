@@ -7,7 +7,5 @@
     "targetName" : "findexecutable", 
     "targetPath" : "lib", 
     "targetType" : "library",
-    "dependencies": {
-    },
-    "subPackages" : ["./examples/findexecutable"]
+    "dependencies": {}
 }

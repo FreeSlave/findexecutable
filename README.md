@@ -10,9 +10,8 @@ Originally this was a part of [standardpaths](https://github.com/FreeSlave/stand
 
 ## Examples
 
-### [Find executable](examples/findexecutable/source/app.d)
+### [Find executable](examples/find.d)
 
 Takes the name of executable as command line argument and searches PATH environment variable for retrieving absolute path to file. On Windows it also tries all known executable extensions.
 
-    dub run :findexecutable --build=release -- whoami dub dmd
-    
+    dub examples/find.d whoami dub dmd
