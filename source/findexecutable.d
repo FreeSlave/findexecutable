@@ -11,11 +11,11 @@
 module findexecutable;
 
 private {
-    import std.algorithm : canFind, splitter, filter;
+    import std.algorithm : canFind, splitter, filter, map;
     import std.path;
     import std.process : environment;
     import std.range;
-    
+
     version(Windows) {
         import std.uni : toLower;
     }
@@ -40,7 +40,7 @@ version(unittest) {
             envVar = env;
             envValue = environment.get(env);
         }
-        
+
         ~this() {
             if (envValue is null) {
                 environment.remove(envVar);
@@ -48,7 +48,7 @@ version(unittest) {
                 environment[envVar] = envValue;
             }
         }
-        
+
         string envVar;
         string envValue;
     }
@@ -56,9 +56,11 @@ version(unittest) {
 
 /**
  * Default executable extensions for the current system.
- * On Windows this functions examines PATHEXT environment variable to get the list of executables extensions. 
- * Fallbacks to .exe;.com;.bat;.cmd if PATHEXT does not list .exe extension.
+ * 
+ * On Windows this functions examines $(B PATHEXT) environment variable to get the list of executables extensions. 
+ * Fallbacks to .exe;.com;.bat;.cmd if $(B PATHEXT) does not list .exe extension.
  * On other systems it always returns empty range.
+ * Note: This function does not cache its result
  */
 @trusted auto executableExtensions() nothrow
 {
@@ -70,11 +72,11 @@ version(unittest) {
                 return false;
             }
         }
-        
+
         static auto splitValues(string pathExt) {
             return pathExt.splitter(pathVarSeparator);
         }
-        
+
         try {
             auto pathExts = splitValues(environment.get("PATHEXT").toLower());
             if (canFind!(filenamesEqual)(pathExts, ".exe") == false) {
@@ -85,7 +87,7 @@ version(unittest) {
         } catch(Exception e) {
             return splitValues(defaultExts);
         }
-        
+
     } else {
         return (string[]).init;
     }
@@ -112,14 +114,14 @@ private bool isExecutable(Exts)(string filePath, Exts exts) nothrow {
             return access(toStringz(filePath), X_OK) == 0;
         } else version(Windows) {
             //Use GetEffectiveRightsFromAclW?
-            
+
             string extension = filePath.extension;
             foreach(ext; exts) {
                 if (filenameCmp(extension, ext) == 0)
                     return true;
             }
             return false;
-            
+
         } else {
             static assert(false, "Unsupported platform");
         }
@@ -145,14 +147,15 @@ private string checkExecutable(Exts)(string filePath, Exts exts) nothrow {
 /**
  * System paths where executable files can be found.
  * Returns: Range of non-empty paths as determined by $(B PATH) environment variable.
- * Note: this function does not cache its result
+ * Note: This function does not cache its result
  */
-@trusted auto binPaths()
+@trusted auto binPaths() nothrow
 {
     import std.exception : collectException;
+    import std.utf : byCodeUnit;
     string pathVar;
     collectException(environment.get("PATH"), pathVar);
-    return splitter(pathVar, pathVarSeparator).filter!(p => p.length != 0);
+    return splitter(pathVar.byCodeUnit, pathVarSeparator).map!(p => p.source).filter!(p => p.length != 0);
 }
 
 ///
@@ -177,11 +180,11 @@ unittest
  *  paths = Range of directories where executable should be searched.
  *  extensions = Range of extensions to append during searching if fileName does not have extension.
  * Note: Currently it does not check if current user really have permission to execute the file on Windows.
- * See_Also: binPaths, executableExtensions
+ * See_Also: $(D binPaths), $(D executableExtensions)
  */
 string findExecutable(Paths, Exts)(string fileName, Paths paths, Exts extensions) 
 if (isInputRange!Paths && is(ElementType!Paths : string) && isInputRange!Exts && is(ElementType!Exts : string))
-{   
+{
     try {
         if (fileName.isAbsolute()) {
             return checkExecutable(fileName, extensions);
@@ -191,9 +194,9 @@ if (isInputRange!Paths && is(ElementType!Paths : string) && isInputRange!Exts &&
                 if (path.empty) {
                     continue;
                 }
-                
+
                 string candidate = buildPath(absolutePath(path), fileName);
-                
+
                 if (candidate.extension.empty && !extensions.empty) {
                     foreach(exeExtension; extensions) {
                         toReturn = checkExecutable(setExtension(candidate, exeExtension), extensions);
@@ -202,7 +205,7 @@ if (isInputRange!Paths && is(ElementType!Paths : string) && isInputRange!Exts &&
                         }
                     }
                 }
-                
+
                 toReturn = checkExecutable(candidate, extensions);
                 if (toReturn.length) {
                     return toReturn;
@@ -210,14 +213,14 @@ if (isInputRange!Paths && is(ElementType!Paths : string) && isInputRange!Exts &&
             }
         }
     } catch (Exception e) {
-        
+
     }
     return null;
 }
 
 /**
  * ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
- * See_Also: binPaths, executableExtensions
+ * See_Also: $(D binPaths), $(D executableExtensions)
  */
 string findExecutable(Paths)(string fileName, Paths paths) 
 if (isInputRange!Paths && is(ElementType!Paths : string))
@@ -228,7 +231,7 @@ if (isInputRange!Paths && is(ElementType!Paths : string))
 /**
  * ditto, but searches in system paths, determined by $(B PATH) environment variable.
  * On Windows when fileName extension is omitted, executable extensions are appended during search.
- * See_Also: binPaths, executableExtensions
+ * See_Also: $(D binPaths), $(D executableExtensions)
  */
 @trusted string findExecutable(string fileName) nothrow {
     try {
