@@ -5,89 +5,80 @@
 		<title>Module findexecutable</title>
 		<link rel="stylesheet" type="text/css" href="./styles/ddox.css"/>
 		<link rel="stylesheet" href="./prettify/prettify.css" type="text/css"/>
-		<script type="text/javascript" src="./scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="./scripts/ddox.js">/**/</script>
+		<script type="text/javascript" src="./scripts/jquery.js">/**/</script><script type="text/javascript" src="./scripts/ddox.js">/**/</script>
 	</head>
 	<body onload="setupDdox();">
 		<nav id="main-nav">
-						<ul class="tree-view">
-							<li>
-								<a href="./findexecutable.html" class="selected module">findexecutable</a>
-							</li>
-						</ul>
-				<noscript>
-					<p style="color: red">The search functionality needs JavaScript enabled</p>
-				</noscript>
-				<div id="symbolSearchPane" style="display: none">
-					<p>
-						<input id="symbolSearch" type="text" placeholder="Search for symbols" onchange="performSymbolSearch(24);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
-					</p>
-	<ul id="symbolSearchResults" style="display: none"></ul>
-	<script type="application/javascript" src="./symbols.js"></script>
-	<script type="application/javascript">
-var symbolSearchRootDir = "./";
-$('#symbolSearchPane').show();
-	</script>
-				</div>
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="./symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "./";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module selected">
+						<a href="./findexecutable.html">findexecutable</a>
+					</div>
+				</li>
+			</ul>
 		</nav>
 		<div id="main-contents">
-			<h1>Module findexecutable</h1>
-			<p>Searching for executable files in system paths.
+			<h1>Module findexecutable</h1><p>Searching for executable files in system paths.
 </p>
-
 			<section></section>
 			<section>
 				<h2>Functions</h2>
 				<table>
 					<col class="caption"/>
 					<tr>
-						<th>Name</th>
-						<th>Description</th>
+						<th>Name</th><th>Description</th>
 					</tr>
 					<tr>
 						<td>
-							<a id="binPaths" class="public" href="./findexecutable/binPaths.html">
-								<code>binPaths</code>
-							</a>
+							<code>
+								<a id="binPaths" class="public" href="./findexecutable/binPaths.html">binPaths</a><span class="decoration">()</span>
+							</code>
 						</td>
 						<td>System paths where executable files can be found.
 </td>
 					</tr>
 					<tr>
 						<td>
-							<a id="executableExtensions" class="public" href="./findexecutable/executableExtensions.html">
-								<code>executableExtensions</code>
-							</a>
+							<code>
+								<a id="executableExtensions" class="public" href="./findexecutable/executableExtensions.html">executableExtensions</a><span class="decoration">()</span>
+							</code>
 						</td>
 						<td>Default executable extensions for the current system.
- On Windows this functions examines PATHEXT environment variable to get the list of executables extensions.
- Fallbacks to .exe;.com;.bat;.cmd if PATHEXT does not list .exe extension.
- On other systems it always returns empty range.
 </td>
 					</tr>
 					<tr>
 						<td>
-							<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">
-								<code>findExecutable</code>
-							</a>
+							<code>
+								<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">findExecutable</a><span class="decoration">(fileName, paths, extensions)</span>
+							</code>
 						</td>
 						<td>Find executable by fileName in the paths.
 </td>
 					</tr>
 					<tr>
 						<td>
-							<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">
-								<code>findExecutable</code>
-							</a>
+							<code>
+								<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">findExecutable</a><span class="decoration">(fileName, paths)</span>
+							</code>
 						</td>
 						<td>ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
 </td>
 					</tr>
 					<tr>
 						<td>
-							<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">
-								<code>findExecutable</code>
-							</a>
+							<code>
+								<a id="findExecutable" class="public" href="./findexecutable/findExecutable.html">findExecutable</a><span class="decoration">(fileName)</span>
+							</code>
 						</td>
 						<td>ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
  On Windows when fileName extension is omitted, executable extensions are appended during search.
@@ -95,24 +86,35 @@ $('#symbolSearchPane').show();
 					</tr>
 				</table>
 			</section>
-			<section>
-				<h2>Authors</h2>
-<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
-			</section>
-			<section>
-				<h2>Copyright</h2>
-<p>Roman Chistokhodov 2016
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							<p>Roman Chistokhodov 2016
 </p>
 
-			</section>
-			<section>
-				<h2>License</h2>
-<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
-			</section>
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
 		</div>
 	</body>
 </html>

@@ -5,54 +5,49 @@
 		<title>Function binPaths</title>
 		<link rel="stylesheet" type="text/css" href="../styles/ddox.css"/>
 		<link rel="stylesheet" href="../prettify/prettify.css" type="text/css"/>
-		<script type="text/javascript" src="../scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="../scripts/ddox.js">/**/</script>
+		<script type="text/javascript" src="../scripts/jquery.js">/**/</script><script type="text/javascript" src="../scripts/ddox.js">/**/</script>
 	</head>
 	<body onload="setupDdox();">
 		<nav id="main-nav">
-						<ul class="tree-view">
-							<li>
-								<a href="../findexecutable.html" class="selected module">findexecutable</a>
-							</li>
-						</ul>
-				<noscript>
-					<p style="color: red">The search functionality needs JavaScript enabled</p>
-				</noscript>
-				<div id="symbolSearchPane" style="display: none">
-					<p>
-						<input id="symbolSearch" type="text" placeholder="Search for symbols" onchange="performSymbolSearch(24);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
-					</p>
-	<ul id="symbolSearchResults" style="display: none"></ul>
-	<script type="application/javascript" src="../symbols.js"></script>
-	<script type="application/javascript">
-var symbolSearchRootDir = "../";
-$('#symbolSearchPane').show();
-	</script>
-				</div>
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="../symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "../";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module selected">
+						<a href="../findexecutable.html">findexecutable</a>
+					</div>
+				</li>
+			</ul>
 		</nav>
 		<div id="main-contents">
-			<h1>Function binPaths</h1>
-			<section>
-				<p>System paths where executable files can be found.
+			<h1>Function binPaths</h1><p>System paths where executable files can be found.
 </p>
-
-					<section>
-						<h3>Prototype</h3>
-						<div class="prototype">
-							<code class="lang-d">
-<span class="kwd">auto </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">algorithm<wbr/></span><span class="pun">.</span><span class="pln">iteration<wbr/></span><span class="pun">.</span><span class="pln">__T12FilterResultS3914findexecutable8binPathsFNeZ9__lambda2TS3std9algorithm9iteration38__T8splitterVAyaa6_61203d3d2062TAyaTaZ8splitterFAyaaZ6ResultZ<wbr/></span><span class="pun">.</span><span class="typ">FilterResult</span> <span class="pln">binPaths<span class="pun">()</span><span class="pln"> </span><span class="kwd">@trusted</span><span class="pun">;</span>
-							</code>
-						</div>
-					</section>
-<section><h3>Returns</h3>
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="kwd">auto </span><span class="pln">std<wbr/></span><span class="pun">.</span><span class="pln">algorithm<wbr/></span><span class="pun">.</span><span class="pln">iteration<wbr/></span><span class="pun">.</span><span class="typ">FilterResult</span>!(findexecutable.binPaths().__lambda3,std.algorithm.iteration.MapResult!(findexecutable.binPaths().__lambda2,std.algorithm.iteration.splitter!("a == b",std.utf.byCodeUnit!(string).byCodeUnit(string).ByCodeUnitImpl,char).splitter(std.utf.byCodeUnit!(string).byCodeUnit(string).ByCodeUnitImpl,char).Result).MapResult) <span class="pln">binPaths</span><span class="pun">(</span><span class="pun">)</span><span class="pln"> </span><span class="kwd">nothrow @trusted</span><span class="pun">;</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h2>Returns</h2>
 <p>Range of non-empty paths as determined by <b>PATH</b> environment variable.
 </p>
 </section>
-<section><h3>Note</h3>
-<p>this function does not cache its result
+<section><h2>Note</h2>
+<p>This function does not cache its result
 </p>
 </section>
-<section><h3>Example</h3>
+<section><h2>Example</h2>
+
 <pre class="code"><code class="lang-d"><span class="kwd">auto </span><span class="pln">pathGuard </span><span class="pun">= </span><span class="typ">EnvGuard</span><span class="pun">(</span><span class="str">"PATH"</span><span class="pun">);
 </span><span class="kwd">version</span><span class="pun">(</span><span class="typ">Windows</span><span class="pun">) {
     </span><span class="pln">environment</span><span class="pun">[</span><span class="str">"PATH"</span><span class="pun">] = </span><span class="str">".;C:\\Windows\\system32;C:\\Program Files"</span><span class="pun">;
@@ -64,25 +59,35 @@ $('#symbolSearchPane').show();
 </span></code></pre>
 </section>
 
-			</section>
-			<section>
-				<h2>Authors</h2>
-<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
-			</section>
-			<section>
-				<h2>Copyright</h2>
-<p>Roman Chistokhodov 2016
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							<p>Roman Chistokhodov 2016
 </p>
 
-			</section>
-			<section>
-				<h2>License</h2>
-<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
-			</section>
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
 		</div>
 	</body>
 </html>

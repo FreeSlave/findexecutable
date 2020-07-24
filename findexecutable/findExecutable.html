@@ -5,62 +5,70 @@
 		<title>findExecutable - multiple declarations</title>
 		<link rel="stylesheet" type="text/css" href="../styles/ddox.css"/>
 		<link rel="stylesheet" href="../prettify/prettify.css" type="text/css"/>
-		<script type="text/javascript" src="../scripts/jquery.js">/**/</script>
-		<script type="text/javascript" src="../scripts/ddox.js">/**/</script>
+		<script type="text/javascript" src="../scripts/jquery.js">/**/</script><script type="text/javascript" src="../scripts/ddox.js">/**/</script>
 	</head>
 	<body onload="setupDdox();">
 		<nav id="main-nav">
-						<ul class="tree-view">
-							<li>
-								<a href="../findexecutable.html" class="selected module">findexecutable</a>
-							</li>
-						</ul>
-				<noscript>
-					<p style="color: red">The search functionality needs JavaScript enabled</p>
-				</noscript>
-				<div id="symbolSearchPane" style="display: none">
-					<p>
-						<input id="symbolSearch" type="text" placeholder="Search for symbols" onchange="performSymbolSearch(24);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
-					</p>
-	<ul id="symbolSearchResults" style="display: none"></ul>
-	<script type="application/javascript" src="../symbols.js"></script>
-	<script type="application/javascript">
-var symbolSearchRootDir = "../";
-$('#symbolSearchPane').show();
-	</script>
-				</div>
+			<noscript>
+				<p style="color: red">The search functionality needs JavaScript enabled</p>
+			</noscript>
+			<div id="symbolSearchPane" style="display: none">
+				<form action="#" method="GET">
+					<input id="symbolSearch" type="text" name="q" placeholder="Search for symbols" autocomplete="off" onchange="performSymbolSearch(40);" onkeypress="this.onchange();" onpaste="this.onchange();" oninput="this.onchange();"/>
+				</form>
+				<ul id="symbolSearchResults" class="symbolList" style="display: none"></ul><script type="application/javascript" src="../symbols.js"></script><script type="application/javascript">var symbolSearchRootDir = "../";
+$('#symbolSearchPane').show();</script>
+			</div>
+			<ul class="tree-view">
+				<li>
+					<div class="module selected">
+						<a href="../findexecutable.html">findexecutable</a>
+					</div>
+				</li>
+			</ul>
 		</nav>
 		<div id="main-contents">
 			<h1>findExecutable - multiple declarations</h1>
-			<ul>
-				<li>Function findExecutable</li>
-				<li>Function findExecutable</li>
-				<li>Function findExecutable</li>
-			</ul>
-			<section>
-				<h2>Function findExecutable</h2>
-				<p>Find executable by fileName in the paths.
+			<nav class="page-nav">
+				<ul>
+					<li>
+						<a href="#0">
+							Function <code>findExecutable</code>
+						</a>
+					</li>
+					<li>
+						<a href="#1">
+							Function <code>findExecutable</code>
+						</a>
+					</li>
+					<li>
+						<a href="#2">
+							Function <code>findExecutable</code>
+						</a>
+					</li>
+				</ul>
+			</nav><h2 id="0">Function findExecutable</h2><p>Find executable by fileName in the paths.
 </p>
-
-					<section>
-						<h3>Prototype</h3>
-						<div class="prototype">
-							<code class="lang-d">
-<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span><span class="typ">Paths</span><span class="pun">, </span><span class="typ">Exts</span><span class="pun">)</span><span class="pun">(</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span><span class="pun">,</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">Exts</span> <span class="pln">extensions</span>
-								<br/>
-<span class="pun">)</span>
-								<br/>
-<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">) &amp;&amp; </span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
-							</code>
-						</div>
-					</section>
-<section><h3>Returns</h3>
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="typ">string</span> <span class="pln">findExecutable</span>(Paths, Exts)
+			<span class="pun">(</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span><span class="pun">,</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">Exts</span> <span class="pln">extensions</span>
+			<br/>
+			<span class="pun">)</span>
+			<br/>
+			<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">) &amp;&amp; </span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Exts </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h3>Returns</h3>
 <p>Absolute path to the existing executable file or an empty string if not found.
 </p>
 </section>
@@ -77,80 +85,82 @@ $('#symbolSearchPane').show();
 </p>
 </section>
 <section><h3>See Also</h3>
-<p>binPaths, executableExtensions
+<p><code class="lang-d"><a href="../findexecutable/binPaths.html"><span class="pln">binPaths</span></a></code>, <code class="lang-d"><a href="../findexecutable/executableExtensions.html"><span class="pln">executableExtensions</span></a></code>
 </p>
 </section>
-
-			</section>
-			<section>
-				<h2>Function findExecutable</h2>
-				<p>ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
+<h2 id="1">Function findExecutable</h2><p>ditto, but on Windows when fileName extension is omitted, executable extensions are appended during search.
 </p>
-
-					<section>
-						<h3>Prototype</h3>
-						<div class="prototype">
-							<code class="lang-d">
-<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span><span class="typ">Paths</span><span class="pun">)</span><span class="pun">(</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span>
-								<br/>
-<span class="pun">)</span>
-								<br/>
-<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
-							</code>
-						</div>
-					</section>
-<section><h3>See Also</h3>
-<p>binPaths, executableExtensions
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="typ">string</span> <span class="pln">findExecutable</span>(Paths)
+			<span class="pun">(</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span><span class="pun">,</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">Paths</span> <span class="pln">paths</span>
+			<br/>
+			<span class="pun">)</span>
+			<br/>
+			<span class="kwd">if</span> <span class="pun">(</span><span class="pln">isInputRange</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">&amp;&amp; </span><span class="kwd">is</span><span class="pun">(</span><span class="typ">ElementType</span><span class="pun">!</span><span class="typ">Paths </span><span class="pun">: </span><span class="typ">string</span><span class="pun">)</span><span class="pun">);</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h3>See Also</h3>
+<p><code class="lang-d"><a href="../findexecutable/binPaths.html"><span class="pln">binPaths</span></a></code>, <code class="lang-d"><a href="../findexecutable/executableExtensions.html"><span class="pln">executableExtensions</span></a></code>
 </p>
 </section>
-
-			</section>
-			<section>
-				<h2>Function findExecutable</h2>
-				<p>ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
+<h2 id="2">Function findExecutable</h2><p>ditto, but searches in system paths, determined by <b>PATH</b> environment variable.
  On Windows when fileName extension is omitted, executable extensions are appended during search.
 </p>
-
-					<section>
-						<h3>Prototype</h3>
-						<div class="prototype">
-							<code class="lang-d">
-<span class="typ">string</span> <span class="pln">findExecutable</span><span class="pun">(</span>
-								<br/>
-&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span>
-								<br/>
-<span class="pun">)</span><span class="pln"> </span><span class="kwd">nothrow @trusted</span><span class="pun">;</span>
-							</code>
-						</div>
-					</section>
-<section><h3>See Also</h3>
-<p>binPaths, executableExtensions
+			<div class="prototype">
+				<code class="lang-d">
+					<div class="single-prototype">
+			<span class="typ">string</span> <span class="pln">findExecutable</span>
+			<span class="pun">(</span>
+			<br/>
+			&nbsp;&nbsp;<span class="typ">string</span> <span class="pln">fileName</span>
+			<br/>
+			<span class="pun">)</span><span class="pln"> </span><span class="kwd">nothrow @trusted</span><span class="pun">;</span>
+					</div>
+				</code>
+			</div>
+			
+			<section><h3>See Also</h3>
+<p><code class="lang-d"><a href="../findexecutable/binPaths.html"><span class="pln">binPaths</span></a></code>, <code class="lang-d"><a href="../findexecutable/executableExtensions.html"><span class="pln">executableExtensions</span></a></code>
 </p>
 </section>
 
-			</section>
-			<section>
-				<h2>Authors</h2>
-<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
+			<footer>
+				<table class="license-info">
+					<tr>
+						<th>Authors</th>
+						<td>
+							<p><a href="https://github.com/FreeSlave">Roman Chistokhodov</a>
 </p>
 
-			</section>
-			<section>
-				<h2>Copyright</h2>
-<p>Roman Chistokhodov 2016
+						</td>
+					</tr>
+					<tr>
+						<th>Copyright</th>
+						<td>
+							<p>Roman Chistokhodov 2016
 </p>
 
-			</section>
-			<section>
-				<h2>License</h2>
-<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
+						</td>
+					</tr>
+					<tr>
+						<th>License</th>
+						<td>
+							<p><a href="http://www.boost.org/LICENSE_1_0.txt">Boost License 1.0</a>.
 </p>
 
-			</section>
+						</td>
+					</tr>
+				</table>
+				<p class="faint">Generated using the DDOX documentation generator</p>
+			</footer>
 		</div>
 	</body>
 </html>
